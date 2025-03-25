@@ -38,7 +38,8 @@
             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
             Title="MainWindow" Height="350" Width="525">
         <Grid>
-            <Button Name="myButton" Content="Click Me" Width="100" Height="50" Click="MyButton_Click"/>
+            <Button Name="myButton" Content="Click Me"
+             Width="100" Height="50" Click="MyButton_Click"/>
         </Grid>
     </Window>
     ```
