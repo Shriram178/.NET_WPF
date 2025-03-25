@@ -149,20 +149,20 @@ But doing this will decrease readability, hence we go for Content syntax.
 ## Collection Syntax
 ```xaml
 <StackPanel>
-     <StackPane1. Children>
+     <StackPanel. Children>
           <TextBlock />
       </StackPanel. Children>
-</ StackPane1>
+</StackPanel>
 ```
 Here, let's see what the XML parser does step by step
 
 Step 1: creates a `StackPanel` object.
-```xaml
+```csharp
 var stackPanel = new StackPanel() ;
 ```
 Step 2: XAML checks the type of the property, the `TextBloack` cannot be assigned to a type of UIElementCollection which is `stackPanel.Children`.
-```xaml
-<!-- This cannot be done -->
+```csharp
+//This cannot be done
 stackPanel.Childern = new TextBloack() ;
 ```
 
