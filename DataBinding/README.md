@@ -91,7 +91,7 @@ Let me show you now what that means. Let's say that this text block is in a Stac
 ```xaml
 <Grid>
   <StackPanel>
-    <TextBlock Text=" {Binding}
+    <TextBlock Text=" {Binding}"/>
   </StackPanel>
 <Grid>
 ```
@@ -100,7 +100,7 @@ the text property of the text block is set to the string Pluralsight.
 ```xaml
 <Grid DataContext="Pluralsight">
   <StackPanel>
-    <TextBlock Text=" {Binding}
+    <TextBlock Text=" {Binding}"/>
   </StackPanel>
 <Grid>
 ```
@@ -108,7 +108,7 @@ When you set the DataContext property on the StackPanel to the string Thomas, th
 ```xaml
 <Grid DataContext="Pluralsight">
   <StackPanel DataContext="Thomas">
-    <TextBlock Text=" {Binding}
+    <TextBlock Text=" {Binding}"/>
   </StackPanel>
 <Grid>
 ```
