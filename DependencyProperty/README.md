@@ -104,4 +104,5 @@ Use a dependency property **when**:
 
 ## 📦 Output Placeholder
 
-Add a screenshot or GIF of the star rating control here.
+![ezgif com-crop](https://github.com/user-attachments/assets/92b0d6b8-bbf2-4803-a8c2-beea59f3530e)
+
