@@ -1,0 +1,27 @@
+﻿<Window x:Class="AsyncProgrammingWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AsyncProgrammingWPF"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <StackPanel Margin="20"
+                HorizontalAlignment="Center">
+        <TextBlock x:Name="StatusText"
+                   FontSize="16"
+                   Margin="0,0,0,20"
+                   Text="Status: Idle" />
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Center">
+            <Button Content="Start Work"
+                    Width="100"
+                    Margin="5"
+                    Click="StartWork_Click" />
+            <Button Content="Cancel"
+                    Width="100"
+                    Margin="5"
+                    Click="CancelWork_Click" />
+        </StackPanel>
+    </StackPanel>
+</Window>
