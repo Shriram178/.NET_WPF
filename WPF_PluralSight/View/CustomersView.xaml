@@ -1,12 +1,21 @@
 ﻿<UserControl x:Class="WPF_PluralSight.View.CustomersView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:WPF_PluralSight.View"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-
+             mc:Ignorable="d"
+             d:DesignHeight="450"
+             d:DesignWidth="800">
+    <UserControl.Resources>
+        <DataTemplate x:Key="CustomerDataTemplate">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding FirstName, ValidatesOnNotifyDataErrors=False}" FontWeight="Bold" />
+                <TextBlock Text="{Binding LastName}"
+                           Margin="5 0 0 0" />
+            </StackPanel>
+        </DataTemplate>
+    </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
@@ -14,38 +23,51 @@
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
         <!-- Customer list -->
-        <Grid x:Name="customerListGrid"
+        <Grid Grid.Column="{Binding NavigationColumn}"
       Background="#777">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <StackPanel Orientation="Horizontal" Margin="10">
-                <Button Margin="10" Width="50">
+            <StackPanel Orientation="Horizontal" Margin="10" 
+                        Visibility="{Binding ElementName=isDeveloper,
+                Path=IsChecked,
+                Converter={StaticResource BooleanToVisibilityConverter}}">
+                <Button Margin="10" Width="50" Command="{Binding AddCommand}" >
                     <StackPanel Orientation="Horizontal">
                         <Image Source="/Images/add.png" Height="12" Margin="0 0 5 0"/>
                         <TextBlock Text="Add" FontSize="12"/>
                     </StackPanel>
                 </Button>
-                <Button Content="Delete" FontSize="12" Width="50" Margin="0 10 10 10" />
-                <Button Margin="0 10 10 10" Click="ButtonMoveNavigation_Click">
+                <Button Command="{Binding DeleteCommand}" Content="Delete" FontSize="12" Width="50" Margin="0 10 10 10" />
+                <Button Margin="0 10 10 10"
+                        Command="{Binding MoveNavigationCommand}">
                     <Image Source="/Images/move.png" Height="12"/>
                 </Button>
             </StackPanel>
-            <ListView x:Name="customerListView" Grid.Row="1" Margin="10 0 10 10">
-                <ListViewItem>Julia</ListViewItem>
-                <ListViewItem>Alex</ListViewItem>
-                <ListViewItem>Thomas</ListViewItem>
-            </ListView>
+            <ListView ItemsSource="{Binding Customers}"
+                      SelectedItem="{Binding SelectedCustomer,Mode=TwoWay}"
+                      ItemTemplate="{StaticResource CustomerDataTemplate}"
+                      Grid.Row="1" Margin="10 0 10 10"
+                      Width="260"/>
         </Grid>
 
         <!-- Customer detail -->
-        <StackPanel Grid.Column="1" Margin="10">
+        <StackPanel Grid.Column="1"
+                    Margin="10"
+                    Visibility="{Binding IsCustomerSelected,
+            Converter={StaticResource BooleanToVisibilityConverter}}">
             <Label>Firstname:</Label>
-            <TextBox Text="{Binding ElementName=customerListView,Path=SelectedItem.Content,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox Text="{Binding SelectedCustomer.FirstName,
+                Mode=TwoWay,
+                UpdateSourceTrigger=PropertyChanged}"/>
             <Label>Lastname:</Label>
-            <TextBox/>
-            <CheckBox Margin="0 10 0 0">
+            <TextBox Text="{Binding SelectedCustomer.LastName,
+                Mode=TwoWay,
+                UpdateSourceTrigger=PropertyChanged}"/>
+            <CheckBox Style="{DynamicResource CheckBoxStyle}" Name="isDeveloper" IsChecked="{Binding SelectedCustomer.IsDeveloper,
+                Mode=TwoWay,
+                UpdateSourceTrigger=PropertyChanged}" Margin="0 20 0 0">
                 Is developer
             </CheckBox>
         </StackPanel>
